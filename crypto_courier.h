@@ -10,10 +10,10 @@ namespace rrl::rlc {
         CryptoCourier(Connection &conn);
 
         virtual msg::Any receive() override;
-        virtual void send(msg::Any const& msg) override;
+        virtual void send(msg::Any const &msg) override;
 
-        void init_as_client(Bytes const &server_pk_modulus, Bytes const &server_pk_exponent);
-        void init_as_server();
+        void init_as_client(RSA const &rsa);
+        void init_as_server(RSA const &rsa);
 
     private:
         CPConnection conn_;

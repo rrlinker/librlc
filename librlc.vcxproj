@@ -151,6 +151,7 @@
     <ClCompile Include="evp_context.cpp" />
     <ClCompile Include="exception.cpp" />
     <ClCompile Include="cp_connection.cpp" />
+    <ClCompile Include="random.cpp" />
     <ClCompile Include="rsa.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +163,7 @@
     <ClInclude Include="cp_connection.h" />
     <ClInclude Include="mode.h" />
     <ClInclude Include="operation.h" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="rsa.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

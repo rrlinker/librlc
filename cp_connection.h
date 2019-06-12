@@ -1,5 +1,9 @@
+#include <optional>
+
 #include <librlcom/connection.h>
 
+#include "rsa.h"
+#include "aes.h"
 #include "bytes.h"
 
 namespace rrl::rlc {
@@ -15,16 +19,25 @@ namespace rrl::rlc {
         virtual void send(std::byte const *data, uint64_t length) override;
         virtual void recv(std::byte *data, uint64_t length) override;
 
-        void init_as_client(Bytes const& server_pk_modulus, Bytes const& server_pk_exponent);
-        void init_as_server();
+        void init_as_client(RSA const &rsa);
+        void init_as_server(RSA const &rsa);
 
         void encrypt_and_flush();
         void gather_and_decrypt();
 
+        void ensure_send_buffer_empty() const;
+        void ensure_recv_buffer_empty() const;
+
     private:
+        void verify_initialized();
+
+        void reset_send_buffer();
+        void set_send_buffer_size();
         void encrypt();
         void flush();
 
+        void reset_recv_buffer();
+        void set_recv_buffer_size();
         void gather();
         void decrypt();
 
@@ -33,7 +46,7 @@ namespace rrl::rlc {
         std::vector<std::byte> recv_buffer_;
         size_t recv_offset_;
 
-        Bytes key_;
+        std::optional<AES> aes_;
     };
 
 }

@@ -9,15 +9,33 @@ using namespace rrl;
 using namespace rrl::rlc;
 
 AES::AES(Bytes const &key)
-    : key(key)
+    : key_(key)
 {
-    switch (key.size()) {
+    switch (key_.size()) {
     case 16: break; // AES128
     case 24: break; // AES192
     case 32: break; // AES256
     default:
-        throw std::runtime_error("Unsupported AES key size");
+        throw std::runtime_error("unsupported AES key size");
     }
+}
+
+AES::AES(AES const &other)
+    : key_(other.key_)
+{}
+
+AES::AES(AES &&other) noexcept
+    : key_(std::move(other.key_))
+{}
+
+AES& AES::operator=(AES const &rhs) {
+    key_ = rhs.key_;
+    return *this;
+}
+
+AES& AES::operator=(AES &&rhs) noexcept {
+    key_ = std::move(rhs.key_);
+    return *this;
 }
 
 Bytes AES::decrypt_ecb(Bytes const &buffer) const {
@@ -32,14 +50,14 @@ Bytes AES::decrypt_cbc(Bytes const &buffer, Bytes const &iv) const {
     if (!iv.empty())
         return crypt(buffer, Operation::Decrypt, iv);
     else
-        return crypt(buffer, Operation::Decrypt, Bytes(key.size()));
+        return crypt(buffer, Operation::Decrypt, Bytes(key_.size()));
 }
 
 Bytes AES::encrypt_cbc(Bytes const &buffer, Bytes const &iv) const {
     if (!iv.empty())
         return crypt(buffer, Operation::Encrypt, iv);
     else
-        return crypt(buffer, Operation::Encrypt, Bytes(key.size()));
+        return crypt(buffer, Operation::Encrypt, Bytes(key_.size()));
 }
 
 Bytes AES::crypt(Bytes const &buffer, Operation operation, Bytes const &iv) const {
@@ -55,7 +73,7 @@ Bytes AES::crypt(Bytes const &buffer, Operation operation, Bytes const &iv) cons
         context,
         static_cast<EVP_CIPHER const*>(get_cipher(iv.empty() ? Mode::ECB : Mode::CBC)),
         NULL,
-        reinterpret_cast<unsigned char const*>(key.data()),
+        reinterpret_cast<unsigned char const*>(key_.data()),
         reinterpret_cast<unsigned char const*>(iv.empty() ? NULL : iv.data()),
         static_cast<int>(operation)
     );
@@ -82,8 +100,12 @@ Bytes AES::crypt(Bytes const &buffer, Operation operation, Bytes const &iv) cons
     return cipher;
 }
 
+size_t AES::key_size() const {
+    return key_.size();
+}
+
 void const* AES::get_cipher(Mode mode) const {
-    switch (key.size()) {
+    switch (key_.size()) {
     case 16:
         return mode == Mode::ECB ? EVP_aes_128_ecb() : EVP_aes_128_cbc();
     case 24:
@@ -96,6 +118,6 @@ void const* AES::get_cipher(Mode mode) const {
 }
 
 void AES::validate_alignment(Bytes const &buffer) const {
-    if (buffer.size() % key.size() != 0)
+    if (buffer.size() % key_.size() != 0)
         throw std::invalid_argument("buffer must be aligned to key size");
 }
