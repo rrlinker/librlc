@@ -1,5 +1,5 @@
-#include "rsa.h"
-#include "exception.h"
+#include "rsa.hpp"
+#include "exception.hpp"
 
 #include <openssl/rsa.h>
 #include <openssl/bn.h>

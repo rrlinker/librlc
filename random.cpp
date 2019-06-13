@@ -1,5 +1,5 @@
-#include "random.h"
-#include "exception.h"
+#include "random.hpp"
+#include "exception.hpp"
 
 #include <openssl/rand.h>
 #include <openssl/err.h>

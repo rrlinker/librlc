@@ -1,18 +1,17 @@
 #include <optional>
 
-#include <librlcom/connection.h>
+#include <librlcom/connection.hpp>
 
-#include "rsa.h"
-#include "aes.h"
-#include "bytes.h"
+#include "rsa.hpp"
+#include "aes.hpp"
+#include "bytes.hpp"
 
 namespace rrl::rlc {
 
-    // Crypto Proxy Connection
-    class CPConnection : public rrl::Connection {
+    class CryptoConnection : public rrl::Connection {
     public:
-        CPConnection(rrl::Connection &conn);
-        virtual ~CPConnection();
+        CryptoConnection(rrl::Connection &conn);
+        virtual ~CryptoConnection() noexcept(false);
 
         virtual void connect(rrl::Address const &address) override;
         virtual void disconnect() override;

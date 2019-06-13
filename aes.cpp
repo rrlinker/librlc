@@ -1,6 +1,6 @@
-#include "aes.h"
-#include "evp_context.h"
-#include "exception.h"
+#include "aes.hpp"
+#include "evp_context.hpp"
+#include "exception.hpp"
 
 #include <openssl/err.h>
 #include <openssl/evp.h>

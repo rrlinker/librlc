@@ -1,4 +1,4 @@
-#include "crypto_courier.h"
+#include "crypto_courier.hpp"
 
 using namespace rrl;
 using namespace rrl::rlc;
@@ -6,6 +6,8 @@ using namespace rrl::rlc;
 CryptoCourier::CryptoCourier(Connection &conn)
     : conn_(conn)
 {}
+
+CryptoCourier::~CryptoCourier() noexcept(false) {}
 
 msg::Any CryptoCourier::receive() {
     conn_.gather_and_decrypt();

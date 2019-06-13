@@ -1,4 +1,4 @@
-#include "evp_context.h"
+#include "evp_context.hpp"
 
 #include <openssl/evp.h>
 

@@ -1,13 +1,14 @@
 #pragma once
 
-#include "cp_connection.h"
-#include <librlcom/courier.h>
+#include "crypto_connection.hpp"
+#include <librlcom/courier.hpp>
 
 namespace rrl::rlc {
 
     class CryptoCourier final : public Courier {
     public:
         CryptoCourier(Connection &conn);
+        virtual ~CryptoCourier() noexcept(false);
 
         virtual msg::Any receive() override;
         virtual void send(msg::Any const &msg) override;
@@ -16,7 +17,7 @@ namespace rrl::rlc {
         void init_as_server(RSA const &rsa);
 
     private:
-        CPConnection conn_;
+        CryptoConnection conn_;
     };
 
 

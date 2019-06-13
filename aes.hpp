@@ -1,8 +1,8 @@
 #pragma once
 
-#include "bytes.h"
-#include "operation.h"
-#include "mode.h"
+#include "bytes.hpp"
+#include "operation.hpp"
+#include "mode.hpp"
 
 namespace rrl::rlc {
 
