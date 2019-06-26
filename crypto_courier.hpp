@@ -15,7 +15,7 @@ namespace rrl::rlc {
 
         void init_as_client(RSA const &rsa);
         void init_as_server(RSA const &rsa);
-        void init_as_server(Bytes const &key);
+        void init_with_key(Bytes const &key);
 
     private:
         CryptoConnection conn_;

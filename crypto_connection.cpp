@@ -56,7 +56,7 @@ void CryptoConnection::init_as_client(RSA const &rsa) {
     send_buffer_ = rsa.encrypt(send_buffer_);
     conn_ << send_buffer_;
 
-    aes_ = key;
+    init_with_key(key);
 
     reset_send_buffer();
 }
@@ -72,12 +72,12 @@ void CryptoConnection::init_as_server(RSA const &rsa) {
     Bytes key(recv_buffer_.size() - recv_offset_);
     recv(key.data(), key.size());
 
-    aes_ = key;
+    init_with_key(key);
 
     ensure_recv_buffer_empty();
 }
 
-void CryptoConnection::init_as_server(Bytes const &key) {
+void CryptoConnection::init_with_key(Bytes const &key) {
     aes_ = key;
 }
 

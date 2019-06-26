@@ -30,6 +30,6 @@ void CryptoCourier::init_as_server(RSA const &rsa) {
     conn_.init_as_server(rsa);
 }
 
-void CryptoCourier::init_as_server(Bytes const &key) {
-    conn_.init_as_server(key);
+void CryptoCourier::init_with_key(Bytes const &key) {
+    conn_.init_with_key(key);
 }
