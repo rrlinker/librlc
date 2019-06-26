@@ -78,6 +78,10 @@ void CryptoConnection::init_as_server(RSA const &rsa) {
     ensure_recv_buffer_empty();
 }
 
+void CryptoConnection::init_as_server(Bytes const &key) {
+    aes_ = key;
+}
+
 void CryptoConnection::verify_initialized() {
     if (!aes_.has_value())
         throw std::runtime_error("CryptoConnection hasn't been initialized");
