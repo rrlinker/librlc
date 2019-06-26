@@ -64,7 +64,6 @@ Bytes AES::crypt(Bytes const &buffer, Operation operation, Bytes const &iv) cons
     validate_alignment(buffer);
 
     Bytes cipher(buffer.size() + 32 /* maximum block size */);
-    int result_size = static_cast<int>(cipher.size());
 
     int result;
     EVPContext context;
@@ -84,10 +83,11 @@ Bytes AES::crypt(Bytes const &buffer, Operation operation, Bytes const &iv) cons
     if (!result)
         throw Exception(ERR_get_error());
 
+    int result_size_update;
     result = EVP_CipherUpdate(
         context,
         reinterpret_cast<unsigned char*>(cipher.data()),
-        &result_size,
+        &result_size_update,
         reinterpret_cast<unsigned char const*>(buffer.data()),
         static_cast<int>(buffer.size())
     );
@@ -95,11 +95,12 @@ Bytes AES::crypt(Bytes const &buffer, Operation operation, Bytes const &iv) cons
     if (!result)
         throw Exception(ERR_get_error());
 
-    result = EVP_CipherFinal_ex(context, reinterpret_cast<unsigned char*>(cipher.data() + result_size), &result_size);
+    int result_size_final;
+    result = EVP_CipherFinal_ex(context, reinterpret_cast<unsigned char*>(cipher.data() + result_size_update), &result_size_final);
     if (!result)
         throw Exception(ERR_get_error());
 
-    cipher.resize(result_size);
+    cipher.resize(result_size_update + result_size_final);
 
     return cipher;
 }
