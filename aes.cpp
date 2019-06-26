@@ -80,6 +80,10 @@ Bytes AES::crypt(Bytes const &buffer, Operation operation, Bytes const &iv) cons
     if (!result)
         throw Exception(ERR_get_error());
 
+    result = EVP_CIPHER_CTX_set_padding(context, 0);
+    if (!result)
+        throw Exception(ERR_get_error());
+
     result = EVP_CipherUpdate(
         context,
         reinterpret_cast<unsigned char*>(cipher.data()),
