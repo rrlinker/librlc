@@ -25,7 +25,6 @@ namespace rrl::rlc {
         void encrypt_and_flush();
         void gather_and_decrypt();
 
-        void ensure_send_buffer_empty() const;
         void ensure_recv_buffer_empty() const;
 
     private:

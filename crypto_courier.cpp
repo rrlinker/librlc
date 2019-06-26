@@ -20,7 +20,6 @@ msg::Any CryptoCourier::receive() {
 void CryptoCourier::send(msg::Any const &msg) {
     msg.write(conn_);
     conn_.encrypt_and_flush();
-    conn_.ensure_send_buffer_empty();
 }
 
 void CryptoCourier::init_as_client(RSA const &rsa) {

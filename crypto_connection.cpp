@@ -62,8 +62,7 @@ void CryptoConnection::init_as_client(RSA const &rsa) {
 }
 
 void CryptoConnection::init_as_server(RSA const &rsa) {
-    if (!recv_buffer_.empty())
-        throw std::runtime_error("recv_buffer_ is not empty");
+    ensure_recv_buffer_empty();
     if (!(rsa.mode & RSA::Private))
         throw std::runtime_error("rsa must be initialized with private key to be able to initialize as a server");
 
@@ -124,8 +123,7 @@ void CryptoConnection::set_recv_buffer_size() {
 }
 
 void CryptoConnection::gather() {
-    if (!recv_buffer_.empty())
-        throw std::runtime_error("recv_buffer_ is not empty");
+    ensure_recv_buffer_empty();
     conn_ >> recv_buffer_;
 }
 
@@ -143,11 +141,6 @@ void CryptoConnection::encrypt_and_flush() {
 void CryptoConnection::gather_and_decrypt() {
     gather();
     decrypt();
-}
-
-void CryptoConnection::ensure_send_buffer_empty() const {
-    if (!send_buffer_.empty())
-        throw std::length_error("send_buffer_ is not empty");
 }
 
 void CryptoConnection::ensure_recv_buffer_empty() const {
