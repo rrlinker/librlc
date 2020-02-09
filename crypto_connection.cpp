@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include <librlcom/bound_check.hpp>
+#include <librrlcom/bound_check.hpp>
 
 using namespace rrl;
 using namespace rrl::rlc;

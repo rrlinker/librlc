@@ -1,6 +1,6 @@
 #include <optional>
 
-#include <librlcom/connection.hpp>
+#include <librrlcom/connection.hpp>
 
 #include "rsa.hpp"
 #include "aes.hpp"

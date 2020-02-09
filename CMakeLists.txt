@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.14)
 
 project(
-    librlcrypto
+    librrlcrypto
     VERSION 0.1
-    DESCRIPTION "librlcom crypto wrapper for Remote Run-time Linker."
+    DESCRIPTION "librrlcom crypto wrapper for Remote Run-time Linker."
     LANGUAGES CXX
 )
 
