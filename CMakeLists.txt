@@ -50,8 +50,14 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_link_libraries(
     ${PROJECT_NAME}
-    PUBLIC libcrypto librrlcom
+    PUBLIC librrlcom
 )
+
+if(UNIX)
+    target_link_libraries(${PROJECT_NAME} PUBLIC crypto)
+else()
+    target_link_libraries(${PROJECT_NAME} PUBLIC libcrypto)
+endif()
 
 include(GNUInstallDirs)
 install(
