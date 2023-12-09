@@ -1,9 +1,9 @@
-#include "crypto_connection.hpp"
-#include "random.hpp"
+#include <rrlinker/crypto/crypto_connection.hpp>
+
+#include <rrlinker/crypto/random.hpp>
+#include <rrlinker/com/bound_check.hpp>
 
 #include <iostream>
-
-#include <librrlcom/bound_check.hpp>
 
 using namespace rrl;
 using namespace rrl::rlc;

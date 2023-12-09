@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bytes.hpp"
+#include <rrlinker/crypto/bytes.hpp>
 
 namespace rrl::rlc {
 

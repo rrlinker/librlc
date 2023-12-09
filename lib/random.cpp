@@ -1,5 +1,6 @@
-#include "random.hpp"
-#include "exception.hpp"
+#include <rrlinker/crypto/random.hpp>
+
+#include <rrlinker/crypto/exception.hpp>
 
 #include <openssl/rand.h>
 #include <openssl/err.h>

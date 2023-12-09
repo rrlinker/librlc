@@ -1,5 +1,6 @@
-#include "bytes.hpp"
+#include <rrlinker/crypto/bytes.hpp>
 
+#include <cstdint>
 #include <stdexcept>
 
 static bool is_hex_char(char c) {

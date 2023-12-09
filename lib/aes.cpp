@@ -1,6 +1,7 @@
-#include "aes.hpp"
-#include "evp_context.hpp"
-#include "exception.hpp"
+#include <rrlinker/crypto/aes.hpp>
+
+#include <rrlinker/crypto/evp_context.hpp>
+#include <rrlinker/crypto/exception.hpp>
 
 #include <openssl/err.h>
 #include <openssl/evp.h>

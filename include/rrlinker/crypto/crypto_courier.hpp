@@ -1,7 +1,7 @@
 #pragma once
 
-#include "crypto_connection.hpp"
-#include <librrlcom/courier.hpp>
+#include <rrlinker/crypto/crypto_connection.hpp>
+#include <rrlinker/com/courier.hpp>
 
 namespace rrl::rlc {
 

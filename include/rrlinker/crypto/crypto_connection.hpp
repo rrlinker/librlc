@@ -1,10 +1,9 @@
 #include <optional>
 
-#include <librrlcom/connection.hpp>
-
-#include "rsa.hpp"
-#include "aes.hpp"
-#include "bytes.hpp"
+#include <rrlinker/com/connection.hpp>
+#include <rrlinker/crypto/rsa.hpp>
+#include <rrlinker/crypto/aes.hpp>
+#include <rrlinker/crypto/bytes.hpp>
 
 namespace rrl::rlc {
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "bytes.hpp"
-#include "operation.hpp"
-#include "mode.hpp"
+#include <rrlinker/crypto/bytes.hpp>
+#include <rrlinker/crypto/operation.hpp>
+#include <rrlinker/crypto/mode.hpp>
 
 namespace rrl::rlc {
 

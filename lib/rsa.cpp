@@ -1,5 +1,6 @@
-#include "rsa.hpp"
-#include "exception.hpp"
+#include <rrlinker/crypto/rsa.hpp>
+
+#include <rrlinker/crypto/exception.hpp>
 
 #include <openssl/rsa.h>
 #include <openssl/bn.h>
